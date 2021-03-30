@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 
 import android.view.animation.AnimationUtils;
 
+import android.view.animation.RotateAnimation;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Animation fab_open, fab_close, fab_rotate;
 
     private boolean isFabOpen = false;
+
+    private int nBefore = 0;
 
 
 
@@ -79,9 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.fab_main:
-
                 toggleFab();
-                fab_main.startAnimation(fab_rotate);
+                testRotation(nBefore + 45);
 
                 break;
 
@@ -141,6 +143,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
+    }
+    public void testRotation(int i) {
+        RotateAnimation ra = new RotateAnimation(nBefore,
+                i,
+                Animation.RELATIVE_TO_SELF,
+                0.5f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f);
+        ra.setDuration(250);
+        ra.setFillAfter(true);
+        fab_main.startAnimation(ra);
+        nBefore = i;
     }
 
 }
